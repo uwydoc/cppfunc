@@ -18,6 +18,6 @@ void printUtil(Stream<T> seq, T end)
 
 int main()
 {
-    Stream<int> seq = seqFrom<int>(1);
+    Stream<int> seq = intsFrom(1);
     printUtil(seq, 10);
 }

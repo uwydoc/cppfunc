@@ -9,31 +9,47 @@
 #include <functional>
 #include <memory>
 
-#include "Cell.h"
 #include "Susp.h"
 
 template<typename T>
 class Stream
 {
-    std::shared_ptr<Susp<Cell<T> > > lazyCell_;
 public:
+    class Cell
+    {
+    public:
+        Cell() {}
+        Cell(T t) : t_(t) {}
+        Cell(T t, Stream next) : t_(t), next_(next) {}
+        T val() const { return t_; }
+        Stream next() { return next_; }
+    private:
+        T t_;
+        Stream next_;
+    };
+
     Stream() {}
-    Stream(std::function<Cell<T>()> f)
-        : lazyCell_(std::make_shared<Susp<Cell<T> > >(f))
+    Stream(std::function<Cell()> f)
+        : lazyCell_(std::make_shared<Susp<Cell> >(f))
     {}
 
     bool isEmpty() const { return !lazyCell_; }
     T get() const { return lazyCell_->get().val(); }
     Stream<T> next() const { return lazyCell_->get().next(); }
+
+private:
+    std::shared_ptr<Susp<Cell> > lazyCell_;
 };
 
-///
 template<typename T>
-Stream<T> seqFrom(T t)
+using Cell = typename Stream<T>::Cell;
+
+///
+Stream<int> intsFrom(int t)
 {
-    return Stream<T>([t]()
+    return Stream<int>([t]()
     {
-        return Cell<T>(t, seqFrom(++t));
+        return Cell<int>(t, intsFrom(t+1));
     });
 }
 
