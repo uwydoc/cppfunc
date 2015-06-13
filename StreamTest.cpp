@@ -4,20 +4,8 @@
 
 #include <iostream>
 
-template<typename T>
-void printUtil(Stream<T> seq, T end)
-{
-    T t = seq.get();
-    if (t == end) {
-        std::cout << std::endl;
-        return;
-    }
-    std::cout << t << ' ';
-    printUtil(seq.next(), end);
-}
-
 int main()
 {
-    Stream<int> seq = intsFrom(1);
-    printUtil(seq, 10);
+    std::cout << take(intsFrom(1), 10) << std::endl;
+    std::cout << take(range(10, 20), 5) << std::endl;
 }
