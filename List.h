@@ -176,6 +176,7 @@ std::ostream& operator<<(std::ostream& os, List<T> lst)
         forEach(lst.tail(), [&os](T t) { os << ", " << t; });
     }
     os << ')';
+    return os;
 }
 
 /// concat
