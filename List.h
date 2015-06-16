@@ -13,10 +13,7 @@
 #include <memory>
 #include <type_traits>
 
-#include <boost/optional.hpp>
-
-template<typename T>
-using Option = boost::optional<T>;
+#include "Option.h"
 
 struct Void {};
 
