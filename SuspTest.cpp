@@ -13,5 +13,5 @@ int main()
     });
     int i = susp.get();
     int j = susp.get();
-    std::cout << i << ' ' << j << std::endl;
+    std::cout << i << ' ' << j << ' ' << n << std::endl;
 }
