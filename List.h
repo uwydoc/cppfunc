@@ -13,9 +13,8 @@
 #include <memory>
 #include <type_traits>
 
+#include "Void.h"
 #include "Option.h"
-
-struct Void {};
 
 template<typename T>
 class List
